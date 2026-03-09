@@ -1,0 +1,27 @@
+{
+  "location": {
+    "name": "Berlin"
+  },
+  "current": {
+    "temp_c": 20,
+    "last_updated_epoch": 1,
+    "condition": {
+      "icon": "//icon.png"
+    }
+  },
+  "forecast": {
+    "forecastday": [
+      {
+        "date_epoch": 1,
+        "day": {
+          "maxtemp_c": 25,
+          "mintemp_c": 15,
+          "condition": {
+            "icon": "//icon.png"
+          }
+        },
+        "hour": []
+      }
+    ]
+  }
+}
