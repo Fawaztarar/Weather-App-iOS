@@ -51,6 +51,11 @@ struct CitiesListView: View {
         .task {
             await vm.loadWeather(for: savedCities)
         }
+        .onChange(of: savedCities) { oldValue, newValue in
+            Task {
+                await vm.loadWeather(for: newValue)
+            }
+        }
         .onAppear {
             vm.searchText = ""
         }
@@ -60,36 +65,42 @@ struct CitiesListView: View {
     
     
     private var SavedCitiesView: some View {
-        
-        List {
-            ForEach(savedCities) { city in
-                
-                NavigationLink {
-                    WeatherDetailView(
-                        vm: container.makeWeatherDetailVM(city: city.name)
-                    )
-                } label: {
-                    CardView(
-                        weather: vm.weatherByCity[city.name],
-                        cityName: city.name
-                    )
-                }
-                .buttonStyle(.plain)   // hides the arrow
-                .swipeActions{
-                    Button(role: .destructive)  {
-                        cityService.deleteCity(city)
+
+        if savedCities.isEmpty {
+            return AnyView(
+                EmptyStateView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            )
+        }
+
+        return AnyView(
+            List {
+                ForEach(savedCities) { city in
+                    
+                    NavigationLink {
+                        WeatherDetailView(
+                            vm: container.makeWeatherDetailVM(city: city.name)
+                        )
                     } label: {
-                        Label("Delete" , systemImage: "trash")
+                        CardView(
+                            weather: vm.weatherByCity[city.name],
+                            cityName: city.name
+                        )
                     }
-                    .accessibilityIdentifier("deleteCityButton")
+                    .buttonStyle(.plain)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            cityService.deleteCity(city)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .accessibilityIdentifier("deleteCityButton")
+                    }
                 }
             }
-        }
-        .listStyle(.plain)
+            .listStyle(.plain)
+        )
     }
-    
-
-
   
     @ViewBuilder
     private var searchContent: some View {
@@ -99,7 +110,7 @@ struct CitiesListView: View {
         case .idle:
             SavedCitiesView
         case .empty:
-          Text("no search result found")
+          Text("no cities found")
                 .foregroundColor(.gray)
         case .loading:
             ProgressView()
@@ -113,8 +124,25 @@ struct CitiesListView: View {
     
 }
 
-
-
+struct EmptyStateView: View {
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            
+            Image(systemName: "magnifyingglass")
+                .font(.largeTitle)
+                .foregroundStyle(.gray)
+            
+            Text("Search for a city")
+                .font(.headline)
+            
+            Text("Use the search bar to find weather.")
+                .font(.subheadline)
+                .foregroundStyle(.gray)
+        }
+        .multilineTextAlignment(.center)
+    }
+}
 struct CardView: View {
     
 //    let city: SavedCity
