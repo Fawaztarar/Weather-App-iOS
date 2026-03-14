@@ -1,6 +1,10 @@
 {
   "location": {
-    "name": "Berlin"
+    "name": "Berlin",
+    "lat": 52.52,
+    "lon": 13.41,
+    "tz_id": "Europe/Berlin",
+    "localtime_epoch": 1
   },
   "current": {
     "temp_c": 20,

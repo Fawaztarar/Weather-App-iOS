@@ -21,15 +21,15 @@ final class WeatherDetailVM: ObservableObject {
         city
     }
     
-//    private let saveService: SavedCityService
+
     
     @Published private(set) var state: WeatherState = .idle
     
     
-    init(service: WeatherServiceProtocol, city: String, ) {
+    init(service: WeatherServiceProtocol, city: String) {
         self.service = service
         self.city = city
-//        self.saveService = saveService
+
     }
     
     
@@ -51,7 +51,5 @@ final class WeatherDetailVM: ObservableObject {
         
     }
     
-//    func save() {
-//        saveService.saveCity(name: city)
-//    }
+
 }

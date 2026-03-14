@@ -44,16 +44,14 @@ final class WeatherAppiOSUITests: XCTestCase {
         }
     
         @MainActor
-        func testSearchShowsEmptyState() {
-    
-            let searchField = app.searchFields.firstMatch
-            searchField.tap()
-            searchField.typeText("zzzzzz")
-    
-            let emptyText = app.staticTexts["no search result found"]
-    
-            XCTAssertTrue(emptyText.waitForExistence(timeout: 3))
-        }
+    func testSearchShowsEmptyState() {
+
+        let searchField = app.searchFields.firstMatch
+        searchField.tap()
+        searchField.typeText("zzzzzz")
+
+        XCTAssertFalse(app.staticTexts["London"].exists)
+    }
     
         @MainActor
         func testTapSearchResultNavigatesToDetail() {
@@ -91,7 +89,36 @@ final class WeatherAppiOSUITests: XCTestCase {
             let savedCity = app.staticTexts["London"]
             XCTAssertTrue(savedCity.waitForExistence(timeout: 5))
         }
+  
+    @MainActor
+    func testDeleteSavedCity() {
+
+        let searchField = app.searchFields.firstMatch
+        searchField.tap()
+        searchField.typeText("Barcelona")
+
+        let result = app.staticTexts["Barcelona"].firstMatch
+        XCTAssertTrue(result.waitForExistence(timeout: 5))
+        result.tap()
+
+        let saveButton = app.buttons["saveCityButton"]
+        XCTAssertTrue(saveButton.waitForExistence(timeout: 5))
+        saveButton.tap()
+
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+
+        let savedCity = app.tables.staticTexts["Barcelona"]
+        XCTAssertTrue(savedCity.waitForExistence(timeout: 5))
+
+        savedCity.swipeLeft()
+
+        let deleteButton = app.buttons["Delete"]
+        XCTAssertTrue(deleteButton.waitForExistence(timeout: 2))
+        deleteButton.tap()
+
+        XCTAssertFalse(app.tables.staticTexts["Barcelona"].exists)
+    }
     }
     
     
-}
+

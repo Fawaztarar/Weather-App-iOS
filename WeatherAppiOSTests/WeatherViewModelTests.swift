@@ -14,11 +14,17 @@ private var mockDetail: WeatherDetail {
     WeatherDetail(
         weather: Weather(
             city: "London",
+            lat: 51.5074,
+            lon: -0.1278,
             temperature: 10,
+            timezone: "Europe/London",
             fetchedAt: Date(),
+            
             highTemp: 20,
             lowTemp: 5,
-            conditionIcon: "//icon.png"
+            conditionIcon: "//icon.png",
+       
+        
         ),
         hourly: [],
         daily: []

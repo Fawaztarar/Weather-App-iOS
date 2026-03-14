@@ -6,14 +6,20 @@
 //
 
 import Foundation
-import Foundation
+
 @testable import WeatherAppiOS
 
 extension WeatherAPIResponse {
 
     static var mock: WeatherAPIResponse {
         WeatherAPIResponse(
-            location: .init(name: "London"),
+            location: .init(
+                name: "London",
+                lat: 51.5074,
+                lon: -0.1278,
+                tz_id: "Europe/London",
+                localtime_epoch: nil
+            ),
             current: .init(
                 temp_c: 15,
                 last_updated_epoch: 0,

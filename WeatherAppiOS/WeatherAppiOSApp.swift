@@ -15,8 +15,11 @@ struct WeatherAppiOSApp: App {
     var body: some Scene {
         WindowGroup {
 
-            CitiesListView(
-                vm: container.makeCitiesListVM()
+//            CitiesListView(
+//                vm: container.makeCitiesListVM()
+//            )
+            CitiesListUIKitView(
+                vm: container.makeCitiesListVM(), container: container
             )
             .modelContainer(for: SavedCity.self)
         }

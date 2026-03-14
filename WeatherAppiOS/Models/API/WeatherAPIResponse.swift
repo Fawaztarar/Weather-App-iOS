@@ -15,6 +15,11 @@ struct WeatherAPIResponse: Decodable {
     
     struct LocationDTO: Decodable  {
         let name: String
+        let lat: Double
+        let lon: Double
+        let tz_id: String
+        let localtime_epoch: Int?
+        
     }
     
     

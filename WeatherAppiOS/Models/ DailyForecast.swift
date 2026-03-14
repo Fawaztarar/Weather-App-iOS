@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct DailyForecast: Identifiable, Equatable {
+struct DailyForecast: Hashable, Identifiable, Equatable, Sendable {
     let id = UUID()
     let day: String
     let icon: String

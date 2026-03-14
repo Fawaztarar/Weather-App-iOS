@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct WeatherDetail: Equatable {
+struct WeatherDetail: Hashable, Sendable {
     let weather: Weather
     let hourly: [HourlyWeather]
     let daily: [DailyForecast]

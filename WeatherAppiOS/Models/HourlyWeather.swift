@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct HourlyWeather: Equatable, Identifiable {
+struct HourlyWeather: Hashable, Equatable, Identifiable, Sendable {
     let id = UUID()
     let time: String
     let temperature: Double

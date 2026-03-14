@@ -9,6 +9,7 @@ import Foundation
 import XCTest
 @testable import WeatherAppiOS
 
+@MainActor
 final class WeatherIntegrationTests: XCTestCase {
 
     func test_weather_json_decoding_and_mapping() throws {

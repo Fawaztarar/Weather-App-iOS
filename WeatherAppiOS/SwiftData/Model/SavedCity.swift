@@ -16,7 +16,7 @@ final class SavedCity {
     
     var createdAt: Date
     
-    init(name: String, createdAt: Date) {
+    init(name: String, createdAt: Date = .now) {
         self.name = name
         self.createdAt = createdAt
     }

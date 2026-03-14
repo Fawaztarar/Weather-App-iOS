@@ -18,8 +18,7 @@ struct CitiesListView: View {
     @Query(sort: \SavedCity.createdAt, order: .reverse)
     private var savedCities: [SavedCity]
     
-    @Query
-    private var weatherCache: [WeatherCache]
+
     
     @Environment(\.modelContext) private var modelContext
     
@@ -56,9 +55,7 @@ struct CitiesListView: View {
                 await vm.loadWeather(for: newValue)
             }
         }
-        .onAppear {
-            vm.searchText = ""
-        }
+      
         .searchable(text: $vm.searchText)
     }
     

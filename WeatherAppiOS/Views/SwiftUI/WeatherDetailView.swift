@@ -29,9 +29,7 @@ struct WeatherDetailView: View {
             
             content
             .task {
-              
                 await vm.fetch()
-                
         }
             
                 .toolbar{
